@@ -5,7 +5,18 @@ class Solution {
     // arr : given array
     // k : find kth smallest element and return using this function
     int kthSmallest(vector<int> &arr, int k) {
-        sort(arr.begin(),arr.end());
-        return arr[k-1];
+        int n = arr.size();
+        
+        // Create a Max Heap 
+        priority_queue<int> maxHeap;
+        
+        for(int i=0; i<n; i++){
+            maxHeap.push(arr[i]);
+            
+            if(maxHeap.size() > k){
+                maxHeap.pop();
+            }
+        }
+        return maxHeap.top();
     }
 };
