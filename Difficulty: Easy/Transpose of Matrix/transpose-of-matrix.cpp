@@ -1,16 +1,13 @@
 class Solution {
   public:
     vector<vector<int>> transpose(vector<vector<int>>& mat) {
-        int row = mat.size();
-        int col = mat[0].size();
+        int n = mat.size();
         
-        vector<vector<int>> result(col,vector<int>(row));
-        
-        for(int i=0; i<row; i++){
-            for(int j=0; j<col; j++){
-                result[j][i] = mat[i][j];
+        for(int i=0; i<n; i++){
+            for(int j=i; j<n; j++){
+                swap(mat[i][j],mat[j][i]);
             }
         }
-        return result;
+        return mat;
     }
 };
