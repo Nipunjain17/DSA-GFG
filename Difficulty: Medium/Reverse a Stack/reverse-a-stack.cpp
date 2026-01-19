@@ -1,16 +1,26 @@
 class Solution {
   public:
+    void insertAtBottom(stack<int> &st, int element){
+        if(st.empty()){
+            st.push(element);
+            return;
+        }
+        
+        int num = st.top();
+        st.pop();
+        insertAtBottom(st,element);
+        
+        st.push(num);
+    }
     void reverseStack(stack<int> &st) {
-        vector<int> arr;
+        // base case 
+        if(st.empty()) return;
         
-        while(!st.empty()){
-            arr.push_back(st.top());
-            st.pop();
-        }
+        int num = st.top();
+        st.pop();
         
-        int n = arr.size();
-        for(int i=0; i<n; i++){
-            st.push(arr[i]);
-        }
+        // Recurrsive Call
+        reverseStack(st);
+        insertAtBottom(st,num);
     }
 };
