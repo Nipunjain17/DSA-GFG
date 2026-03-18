@@ -14,26 +14,33 @@ public:
 */
 
 class Solution {
-  private:
-    void leftV(Node* root, int level, vector<int>& arr){
-        if(root == NULL) return;
-        
-        if(level == arr.size()){
-            arr.push_back(root->data);
-        }
-        leftV(root->left,level+1,arr);
-        leftV(root->right, level+1,arr);
-        
-        return;
-    }
   public:
     vector<int> leftView(Node *root) {
-        vector<int> arr;
-        if(root == NULL) return arr;
+        vector<int> ans;
         
-        arr.push_back(root->data);
-        leftV(root, 0,arr);
+        if(root == NULL);
         
-        return arr;
+        queue<Node*> q;
+        q.push(root);
+        
+        while(!q.empty()){
+            int size = q.size();
+            ans.push_back(q.front()->data);
+            
+            while(size--){
+                Node* temp = q.front();
+                q.pop();
+                
+                if(temp->left){
+                    q.push(temp->left);
+                }
+                
+                if(temp->right){
+                    q.push(temp->right);
+                }
+            }
+        }
+        
+        return ans;
     }
 };
