@@ -1,25 +1,20 @@
-// User function template for C++
-
 class Solution {
-  private:
-    void deletion(stack<int> &s, int count, int n){
-        if(count == n/2){
+  public:
+     void solve(stack<int>& s, int k) {
+        if(k == 1) {
             s.pop();
             return;
         }
-        
-        int data = s.top();
+        int x = s.top();
         s.pop();
-        
-        deletion(s,count+1,n);
-        
-        s.push(data);
-        return;
+        solve(s, k - 1);
+        s.push(x);
     }
-  public:
-    // Function to delete middle element of a stack.
+    
     void deleteMid(stack<int>& s) {
         int n = s.size();
-        deletion(s,0,n);
+        int mid = (n + 1) / 2;
+        int k = n - mid + 1;
+        solve(s, k);
     }
 };
